@@ -1,0 +1,8 @@
+{
+  "name": "Clipboard Shield",
+  "description": "Native financial security & clipboard interceptor with real-time notification protection, floating system authorization overlay, multi-platform downloads, and underwater aesthetic.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
