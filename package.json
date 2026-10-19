@@ -1,14 +1,73 @@
 {
-  "name": "react-example",
+  "name": "clipboard-shield",
+  "productName": "Clipboard Shield",
+  "version": "1.4.0",
+  "description": "Native financial security & clipboard interceptor with real-time notification protection and zero-leak execution.",
+  "author": "Ryka Parikh",
+  "license": "MIT",
+  "main": "dist-electron/main.js",
   "private": true,
-  "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",
     "build": "vite build",
     "preview": "vite preview",
-    "clean": "rm -rf dist server.js",
-    "lint": "tsc --noEmit"
+    "clean": "rm -rf dist dist-electron release",
+    "lint": "tsc --noEmit",
+    "build:electron": "tsc -p tsconfig.electron.json",
+    "build:all": "vite build && tsc -p tsconfig.electron.json",
+    "package:dir": "npm run build:all && electron-builder --dir",
+    "package:win": "npm run build:all && electron-builder --win --x64",
+    "test": "vitest run"
+  },
+  "build": {
+    "appId": "io.clipboardshield.desktop",
+    "productName": "Clipboard Shield",
+    "copyright": "Copyright © 2026 Clipboard Shield Contributors",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "dist-electron/**/*",
+      "build/icon.ico",
+      "build/icon.png",
+      "build/tray.ico",
+      "build/tray.png",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "perMachine": false,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Clipboard Shield",
+      "uninstallDisplayName": "Clipboard Shield",
+      "deleteAppDataOnUninstall": false,
+      "runAfterFinish": true,
+      "artifactName": "Clipboard-Shield-Setup-${version}.${ext}"
+    },
+    "portable": {
+      "artifactName": "Clipboard-Shield-${version}-portable.${ext}"
+    }
   },
   "dependencies": {
     "@google/genai": "^2.4.0",
@@ -32,9 +91,12 @@
     "@types/react-dom": "^19.3.0",
     "@types/three": "^0.186.0",
     "autoprefixer": "^10.4.21",
+    "electron": "^44.9.0",
+    "electron-builder": "^26.15.3",
     "esbuild": "^0.25.0",
     "tailwindcss": "^4.3.3",
     "tsx": "^4.21.0",
-    "typescript": "^7.0.2"
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.5"
   }
 }

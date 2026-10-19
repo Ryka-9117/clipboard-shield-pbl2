@@ -1,0 +1,73 @@
+name: Build and Release Windows Desktop App
+
+on:
+  push:
+    branches: [ main ]
+    tags: [ 'v*' ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Verify TypeScript types
+        run: npm run lint
+
+      - name: Run automated tests
+        run: npx vitest run
+
+      - name: Build web application and Electron main process
+        run: npm run build:all
+
+      - name: Package Windows Installer and Portable Executables
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx electron-builder --win --x64
+
+      - name: Generate SHA-256 Checksums
+        shell: pwsh
+        run: |
+          Get-FileHash release/*.exe -Algorithm SHA256 | ForEach-Object {
+            "$($_.Hash.ToLower()) *$([System.IO.Path]::GetFileName($_.Path))"
+          } | Out-File -Encoding utf8 release/SHA256SUMS.txt
+          Get-Content release/SHA256SUMS.txt
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: clipboard-shield-windows-x64
+          path: |
+            release/*.exe
+            release/SHA256SUMS.txt
+            release/latest.yml
+
+      - name: Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            release/Clipboard-Shield-Setup-*.exe
+            release/Clipboard-Shield-*-portable.exe
+            release/SHA256SUMS.txt
+            release/latest.yml
+          draft: false
+          prerelease: false
+          generate_release_notes: true

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { UnderwaterScene } from './components/UnderwaterScene';
+import { DesktopDashboard } from './components/DesktopDashboard';
 import { NativeAppSimulator } from './components/NativeAppSimulator';
 import { ArchitectureFlow } from './components/ArchitectureFlow';
 import { DownloadHub } from './components/DownloadHub';
@@ -97,6 +98,12 @@ export default function App() {
       {/* Main Content Sections */}
       <main className="relative z-10">
         <Hero />
+
+        {/* Real Native Desktop Dashboard & Control Center */}
+        <DesktopDashboard
+          isDarkMode={isDarkMode}
+          onNewAudit={handleNewAudit}
+        />
 
         <div id="simulator-section">
           <NativeAppSimulator

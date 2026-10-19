@@ -1,5 +1,5 @@
-import React from 'react';
-import { Shield, Sun, Moon, Volume2, VolumeX } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Shield, ShieldCheck, Sun, Moon, Volume2, VolumeX } from 'lucide-react';
 import { oceanAudio } from '../utils/audio';
 
 interface NavbarProps {
@@ -15,6 +15,22 @@ export const Navbar: React.FC<NavbarProps> = ({
   isAudioActive,
   onToggleAudio,
 }) => {
+  const isDesktop = typeof window !== 'undefined' && Boolean(window.electronAPI);
+  const [isShieldActive, setIsShieldActive] = useState<boolean>(true);
+
+  useEffect(() => {
+    if (isDesktop && window.electronAPI) {
+      window.electronAPI.getStatus().then((status) => {
+        setIsShieldActive(status.protectionEnabled);
+      }).catch(() => {});
+
+      const unsub = window.electronAPI.onStatusChanged((status) => {
+        setIsShieldActive(status.protectionEnabled);
+      });
+      return () => unsub();
+    }
+  }, [isDesktop]);
+
   const scrollTo = (id: string) => {
     oceanAudio.playBubble();
     const el = document.getElementById(id);
@@ -25,8 +41,8 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header className="sticky top-0 z-50 w-full backdrop-blur-md bg-white/75 dark:bg-slate-950/75 border-b border-slate-200/60 dark:border-slate-800/60 transition-colors">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-8">
-        {/* Zone 1: Single text element wordmark */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-6">
+        {/* Brand wordmark */}
         <a
           href="#"
           onClick={(e) => {
@@ -39,10 +55,22 @@ export const Navbar: React.FC<NavbarProps> = ({
             <Shield className="w-4 h-4 fill-white/20" />
           </div>
           <span>Clipboard Shield</span>
+          {isDesktop && (
+            <span className="hidden sm:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-teal-500/15 text-teal-600 dark:text-teal-400 border border-teal-500/20">
+              <span className={`w-1.5 h-1.5 rounded-full ${isShieldActive ? 'bg-emerald-500 animate-pulse' : 'bg-amber-500'}`} />
+              {isShieldActive ? 'Desktop Active' : 'Desktop Paused'}
+            </span>
+          )}
         </a>
 
-        {/* Zone 2: 4–5 clean single-line text navigation links */}
-        <nav className="hidden md:flex items-center gap-7 text-xs font-medium text-slate-600 dark:text-slate-300">
+        {/* Clean single-line text navigation links */}
+        <nav className="hidden lg:flex items-center gap-6 text-xs font-medium text-slate-600 dark:text-slate-300">
+          <button
+            onClick={() => scrollTo('desktop-dashboard')}
+            className="hover:text-teal-600 dark:hover:text-teal-400 transition-colors whitespace-nowrap shrink-0 font-semibold text-teal-700 dark:text-teal-300"
+          >
+            Desktop Console
+          </button>
           <button
             onClick={() => scrollTo('simulator-section')}
             className="hover:text-teal-600 dark:hover:text-teal-400 transition-colors whitespace-nowrap shrink-0"
@@ -75,7 +103,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
         </nav>
 
-        {/* Zone 3: 1 primary action button + toggles */}
+        {/* Action button + toggles */}
         <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           {/* Audio Ambiance toggle */}
           <button
@@ -99,10 +127,10 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* Primary Action Button */}
           <button
-            onClick={() => scrollTo('download-section')}
+            onClick={() => scrollTo(isDesktop ? 'desktop-dashboard' : 'download-section')}
             className="px-4 py-2 text-xs font-semibold text-white bg-teal-600 hover:bg-teal-500 rounded-xl transition-colors shadow-sm whitespace-nowrap shrink-0"
           >
-            Download App
+            {isDesktop ? 'Open Dashboard' : 'Download Windows App'}
           </button>
         </div>
       </div>

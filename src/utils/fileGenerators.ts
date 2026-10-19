@@ -313,23 +313,36 @@ export function downloadStandaloneApk() {
   triggerFileDownload(blob, 'ClipboardShield-v1.4.0.apk');
 }
 
+export const WINDOWS_RELEASE_INFO = {
+  version: '1.4.0',
+  installerFilename: 'Clipboard-Shield-Setup-1.4.0.exe',
+  portableFilename: 'Clipboard-Shield-1.4.0-portable.exe',
+  githubReleaseUrl: 'https://github.com/ryka-parikh/clipboard-shield-pbl2/releases/tag/v1.4.0',
+  installerDownloadUrl: 'https://github.com/ryka-parikh/clipboard-shield-pbl2/releases/download/v1.4.0/Clipboard-Shield-Setup-1.4.0.exe',
+  portableDownloadUrl: 'https://github.com/ryka-parikh/clipboard-shield-pbl2/releases/download/v1.4.0/Clipboard-Shield-1.4.0-portable.exe',
+  sha256: '948af1d34e039dd67beb9481e1fa048ece7d2b3f3b4d2799ca99901fbe980476',
+};
+
 export function downloadWindowsInstaller() {
-  const batScript = `@echo off
-echo ========================================================
-echo         Clipboard Shield - Windows Native Setup
-echo    Real-time Clipboard & Financial Fraud Interceptor
-echo ========================================================
-echo.
-echo [*] Checking system permissions...
-echo [*] Initializing Windows Clipboard Listener Daemon...
-echo [*] Configuring SHA-256 HMAC Encrypted Audit Pipe...
-echo.
-powershell -Command "Write-Host 'Shield Daemon active in system notification tray.' -ForegroundColor Cyan"
-powershell -Command "[System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms') | Out-Null; [System.Windows.Forms.MessageBox]::Show('Clipboard Shield is now running in your Windows system tray. Financial transactions and clipboard copying are actively protected.', 'Clipboard Shield Active', 'OK', 'Information')"
-pause
-`;
-  const blob = new Blob([batScript], { type: 'application/x-bat' });
-  triggerFileDownload(blob, 'ClipboardShield-Windows-Setup.bat');
+  const link = document.createElement('a');
+  link.href = WINDOWS_RELEASE_INFO.installerDownloadUrl;
+  link.download = WINDOWS_RELEASE_INFO.installerFilename;
+  link.target = '_blank';
+  link.rel = 'noopener noreferrer';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+export function downloadWindowsPortable() {
+  const link = document.createElement('a');
+  link.href = WINDOWS_RELEASE_INFO.portableDownloadUrl;
+  link.download = WINDOWS_RELEASE_INFO.portableFilename;
+  link.target = '_blank';
+  link.rel = 'noopener noreferrer';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
 }
 
 export function downloadIosConfig() {

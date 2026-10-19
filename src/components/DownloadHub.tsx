@@ -17,6 +17,8 @@ import {
   downloadAndroidProjectZip,
   downloadStandaloneApk,
   downloadWindowsInstaller,
+  downloadWindowsPortable,
+  WINDOWS_RELEASE_INFO,
   downloadIosConfig,
   downloadMacOsInstaller,
   downloadLinuxPackage
@@ -187,24 +189,54 @@ export const DownloadHub: React.FC = () => {
             <div className="lg:col-span-7 space-y-4">
               <div className="inline-flex items-center gap-2 text-xs font-mono text-teal-600 dark:text-teal-400">
                 <Monitor className="w-3.5 h-3.5" />
-                <span>Windows 10 / 11 (64-bit) · Native System Tray Guard</span>
+                <span>Windows 10 / 11 (64-bit) · Native System Tray Guard · Zero Telemetry</span>
               </div>
               <h3 className="text-xl sm:text-2xl font-semibold text-slate-900 dark:text-slate-100">
                 Clipboard Shield for Windows
               </h3>
               <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-                Guards Windows Clipboard against malicious keyloggers, auto-sanitizes credit card and OTP copy operations, and logs authorized debits directly to local encrypted memory.
+                Genuine native Windows desktop application with system-tray background daemon, real-time Luhn credit card validation, crypto address guarding, and automatic sensitive buffer sanitization.
               </p>
 
-              <div className="pt-2">
+              {/* Real Download Buttons */}
+              <div className="flex flex-wrap items-center gap-3 pt-2">
                 <button
-                  onClick={() => handleDownload(() => downloadWindowsInstaller(), 'ClipboardShield-Windows-Setup.bat')}
+                  onClick={() => handleDownload(() => downloadWindowsInstaller(), WINDOWS_RELEASE_INFO.installerFilename)}
                   disabled={isDownloading}
                   className="flex items-center gap-2 px-5 py-2.5 text-xs font-semibold rounded-xl bg-teal-600 text-white hover:bg-teal-700 transition-all shadow-sm"
                 >
                   <Download className="w-4 h-4" />
-                  <span>Download Windows Setup (.bat / .exe wrapper)</span>
+                  <span>Download Windows Setup (.exe)</span>
                 </button>
+
+                <button
+                  onClick={() => handleDownload(() => downloadWindowsPortable(), WINDOWS_RELEASE_INFO.portableFilename)}
+                  disabled={isDownloading}
+                  className="flex items-center gap-2 px-4 py-2.5 text-xs font-semibold rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all border border-slate-200 dark:border-slate-700"
+                >
+                  <Monitor className="w-4 h-4 text-teal-600 dark:text-teal-400" />
+                  <span>Portable Executable (.exe)</span>
+                </button>
+
+                <a
+                  href={WINDOWS_RELEASE_INFO.githubReleaseUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3.5 py-2.5 text-xs font-semibold rounded-xl text-slate-600 dark:text-slate-400 hover:text-teal-600 dark:hover:text-teal-400 transition-colors"
+                >
+                  View Release Notes
+                </a>
+              </div>
+
+              {/* SHA-256 Checksum Display */}
+              <div className="p-3 bg-slate-100 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 rounded-xl space-y-1 font-mono text-[11px]">
+                <div className="text-slate-500 dark:text-slate-400 font-semibold flex items-center justify-between">
+                  <span>SHA-256 Verification Hash</span>
+                  <span className="text-[10px] text-teal-600 dark:text-teal-400 font-normal">v1.4.0 Release</span>
+                </div>
+                <div className="text-slate-700 dark:text-slate-300 break-all select-all">
+                  {WINDOWS_RELEASE_INFO.sha256}
+                </div>
               </div>
 
               {downloadSuccess && (
@@ -225,8 +257,8 @@ export const DownloadHub: React.FC = () => {
                     1
                   </span>
                   <div>
-                    <strong className="text-slate-800 dark:text-slate-200 block">Run Setup Script</strong>
-                    <span>Right-click <code className="font-mono">ClipboardShield-Windows-Setup.bat</code> &gt; Run.</span>
+                    <strong className="text-slate-800 dark:text-slate-200 block">Download Setup Executable</strong>
+                    <span>Get <code className="font-mono text-teal-600 dark:text-teal-400">Clipboard-Shield-Setup-1.4.0.exe</code> above.</span>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
@@ -234,8 +266,17 @@ export const DownloadHub: React.FC = () => {
                     2
                   </span>
                   <div>
+                    <strong className="text-slate-800 dark:text-slate-200 block">Run Installer (No Admin Required)</strong>
+                    <span>Installs per-user to standard AppData directory without elevation.</span>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="w-5 h-5 rounded-full bg-teal-100 dark:bg-teal-900/60 text-teal-700 dark:text-teal-300 flex items-center justify-center font-mono text-[10px] shrink-0 mt-0.5">
+                    3
+                  </span>
+                  <div>
                     <strong className="text-slate-800 dark:text-slate-200 block">Tray Icon Active</strong>
-                    <span>Find Clipboard Shield in your Windows taskbar system tray.</span>
+                    <span>Clipboard Shield automatically begins running in your taskbar notification tray.</span>
                   </div>
                 </div>
               </div>
