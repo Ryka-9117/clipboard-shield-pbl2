@@ -2,7 +2,6 @@ node_modules/
 dist/
 dist-electron/
 release/
-public/downloads/
 coverage/
 .DS_Store
 *.log

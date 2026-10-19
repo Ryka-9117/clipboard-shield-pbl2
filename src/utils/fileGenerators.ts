@@ -320,12 +320,13 @@ export const WINDOWS_RELEASE_INFO = {
   githubReleaseUrl: 'https://github.com/Ryka-9117/clipboard-shield-pbl2/releases',
   installerDownloadUrl: '/downloads/Clipboard-Shield-Setup-1.4.0.exe',
   portableDownloadUrl: '/downloads/Clipboard-Shield-1.4.0-portable.exe',
-  sha256: '948af1d34e039dd67beb9481e1fa048ece7d2b3f3b4d2799ca99901fbe980476',
+  sha256: '0c1ce01aa9ca24dc28d58a256eef0078aecace706a529b8f833d9d17d39b0baf',
 };
 
 export function downloadWindowsInstaller() {
+  const origin = typeof window !== 'undefined' ? window.location.origin : '';
   const link = document.createElement('a');
-  link.href = '/downloads/Clipboard-Shield-Setup-1.4.0.exe';
+  link.href = `${origin}/downloads/${WINDOWS_RELEASE_INFO.installerFilename}`;
   link.download = WINDOWS_RELEASE_INFO.installerFilename;
   document.body.appendChild(link);
   link.click();
@@ -333,8 +334,9 @@ export function downloadWindowsInstaller() {
 }
 
 export function downloadWindowsPortable() {
+  const origin = typeof window !== 'undefined' ? window.location.origin : '';
   const link = document.createElement('a');
-  link.href = '/downloads/Clipboard-Shield-1.4.0-portable.exe';
+  link.href = `${origin}/downloads/${WINDOWS_RELEASE_INFO.portableFilename}`;
   link.download = WINDOWS_RELEASE_INFO.portableFilename;
   document.body.appendChild(link);
   link.click();
