@@ -317,18 +317,16 @@ export const WINDOWS_RELEASE_INFO = {
   version: '1.4.0',
   installerFilename: 'Clipboard-Shield-Setup-1.4.0.exe',
   portableFilename: 'Clipboard-Shield-1.4.0-portable.exe',
-  githubReleaseUrl: 'https://github.com/ryka-parikh/clipboard-shield-pbl2/releases/tag/v1.4.0',
-  installerDownloadUrl: 'https://github.com/ryka-parikh/clipboard-shield-pbl2/releases/download/v1.4.0/Clipboard-Shield-Setup-1.4.0.exe',
-  portableDownloadUrl: 'https://github.com/ryka-parikh/clipboard-shield-pbl2/releases/download/v1.4.0/Clipboard-Shield-1.4.0-portable.exe',
+  githubReleaseUrl: 'https://github.com/Ryka-9117/clipboard-shield-pbl2/releases',
+  installerDownloadUrl: '/downloads/Clipboard-Shield-Setup-1.4.0.exe',
+  portableDownloadUrl: '/downloads/Clipboard-Shield-1.4.0-portable.exe',
   sha256: '948af1d34e039dd67beb9481e1fa048ece7d2b3f3b4d2799ca99901fbe980476',
 };
 
 export function downloadWindowsInstaller() {
   const link = document.createElement('a');
-  link.href = WINDOWS_RELEASE_INFO.installerDownloadUrl;
+  link.href = '/downloads/Clipboard-Shield-Setup-1.4.0.exe';
   link.download = WINDOWS_RELEASE_INFO.installerFilename;
-  link.target = '_blank';
-  link.rel = 'noopener noreferrer';
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
@@ -336,10 +334,8 @@ export function downloadWindowsInstaller() {
 
 export function downloadWindowsPortable() {
   const link = document.createElement('a');
-  link.href = WINDOWS_RELEASE_INFO.portableDownloadUrl;
+  link.href = '/downloads/Clipboard-Shield-1.4.0-portable.exe';
   link.download = WINDOWS_RELEASE_INFO.portableFilename;
-  link.target = '_blank';
-  link.rel = 'noopener noreferrer';
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
