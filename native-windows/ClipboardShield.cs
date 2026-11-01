@@ -212,7 +212,7 @@ namespace ClipboardShield
             // 5. OTP
             if (threatCategory == null)
             {
-                Match otp = Regex.Match(text, @"(?:OTP|verification code|one-time password)[\s:=-]+([0-9]{4,8})\b", RegexOptions.IgnoreCase);
+                Match otp = Regex.Match(text, @"(?:OTP|verification code|one-time password|passcode|security code)(?:\s+(?:is|code|number))*\s*[:=-]?\s*([0-9]{4,8})\b", RegexOptions.IgnoreCase);
                 if (otp.Success)
                 {
                     threatCategory = "OTP_CODE";
