@@ -192,8 +192,9 @@ export default function App() {
 
   // Direct Android APK Download
   const downloadAndroidApk = () => {
+    const origin = typeof window !== 'undefined' ? window.location.origin : '';
     const link = document.createElement('a');
-    link.href = './downloads/ClipboardShield-v1.4.0.apk';
+    link.href = `${origin}/downloads/ClipboardShield-v1.4.0.apk`;
     link.download = 'ClipboardShield-v1.4.0.apk';
     document.body.appendChild(link);
     link.click();
@@ -202,8 +203,9 @@ export default function App() {
 
   // Direct Android Source Zip Download
   const downloadAndroidSourceZip = () => {
+    const origin = typeof window !== 'undefined' ? window.location.origin : '';
     const link = document.createElement('a');
-    link.href = './downloads/ClipboardShield-Android-Source.zip';
+    link.href = `${origin}/downloads/ClipboardShield-Android-Source.zip`;
     link.download = 'ClipboardShield-Android-Source.zip';
     document.body.appendChild(link);
     link.click();

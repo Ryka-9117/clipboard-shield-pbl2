@@ -387,7 +387,7 @@ export const SecurityConsole: React.FC<SecurityConsoleProps> = ({
         </div>
 
         {/* Tab Navigation */}
-        <div className="flex border-b border-[var(--border-light)] px-6 bg-white/50">
+        <div className="flex border-b border-[var(--border-light)] px-4 sm:px-6 bg-white/50 overflow-x-auto whitespace-nowrap scrollbar-none">
           {[
             { id: 'inspector', label: 'Threat Inspector', icon: Activity },
             { id: 'simulator', label: 'Mobile Simulator', icon: Smartphone },

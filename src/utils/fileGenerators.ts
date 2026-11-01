@@ -239,78 +239,23 @@ public class ClipboardShieldApplication {
 }`;
 
 export async function downloadAndroidProjectZip() {
-  const zip = new JSZip();
-
-  zip.file('README.md', `# Clipboard Shield - Native Android App
-This package contains the complete native Android codebase for Clipboard Shield.
-
-## Permissions Required:
-- \`android.permission.SYSTEM_ALERT_WINDOW\`: Allows drawing the financial authorization prompt over other applications (GPay, PhonePe, banking apps).
-- \`android.permission.BIND_NOTIFICATION_LISTENER_SERVICE\`: Allows intercepting financial transaction SMS and banking notifications in real-time.
-
-## Project Structure:
-- \`app/src/main/AndroidManifest.xml\`
-- \`app/src/main/java/com/clipboardshield/app/FloatingOverlayActivity.java\`
-- \`app/src/main/java/com/clipboardshield/app/NotificationService.java\`
-- \`app/src/main/res/layout/activity_overlay.xml\`
-- \`backend/ClipboardShieldApplication.java\` (Spring Boot REST Server)
-
-## How to Build:
-1. Open this folder in Android Studio.
-2. Build -> Make Project or run: \`./gradlew assembleDebug\`
-3. Install to device: \`adb install app/build/outputs/apk/debug/app-debug.apk\`
-4. Go to Settings -> Apps -> Special App Access -> Notification Access -> Enable Clipboard Shield.
-5. Grant 'Display over other apps' permission.
-`);
-
-  zip.file('app/src/main/AndroidManifest.xml', ANDROID_MANIFEST);
-  zip.file('app/src/main/java/com/clipboardshield/app/FloatingOverlayActivity.java', FLOATING_OVERLAY_JAVA);
-  zip.file('app/src/main/java/com/clipboardshield/app/NotificationService.java', NOTIFICATION_SERVICE_JAVA);
-  zip.file('app/src/main/res/layout/activity_overlay.xml', ACTIVITY_OVERLAY_XML);
-  zip.file('backend/ClipboardShieldApplication.java', SPRING_BOOT_BACKEND_JAVA);
-
-  // Gradle configs
-  zip.file('build.gradle', `buildscript {
-    repositories { google(); mavenCentral() }
-    dependencies { classpath 'com.android.tools.build:gradle:8.2.2' }
-}
-allprojects { repositories { google(); mavenCentral() } }`);
-
-  zip.file('app/build.gradle', `plugins { id 'com.android.application' }
-android {
-    namespace 'com.clipboardshield.app'
-    compileSdk 34
-    defaultConfig {
-        applicationId "com.clipboardshield.app"
-        minSdk 26
-        targetSdk 34
-        versionCode 1
-        versionName "1.4.0"
-    }
-}
-dependencies {
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.11.0'
-}`);
-
-  const content = await zip.generateAsync({ type: 'blob' });
-  triggerFileDownload(content, 'ClipboardShield-Android-Source.zip');
+  const origin = typeof window !== 'undefined' ? window.location.origin : '';
+  const link = document.createElement('a');
+  link.href = `${origin}/downloads/ClipboardShield-Android-Source.zip`;
+  link.download = 'ClipboardShield-Android-Source.zip';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
 }
 
 export function downloadStandaloneApk() {
-  // Generate valid APK bundle with manifest & binary signature header
-  const manifestData = new TextEncoder().encode(
-    `[CLIPBOARD-SHIELD-STANDALONE-APK-V1.4.0]\n` +
-    `Package: com.clipboardshield.app\n` +
-    `Permissions: SYSTEM_ALERT_WINDOW, BIND_NOTIFICATION_LISTENER_SERVICE, FOREGROUND_SERVICE\n` +
-    `Build: Release Signed\n` +
-    `Checksum-SHA256: 4f9812bc89a710dfb418471c26ec39d48123fa97825a0715df91401f14\n\n` +
-    `Included Services: NotificationService, FloatingOverlayActivity\n` +
-    ANDROID_MANIFEST
-  );
-
-  const blob = new Blob([manifestData], { type: 'application/vnd.android.package-archive' });
-  triggerFileDownload(blob, 'ClipboardShield-v1.4.0.apk');
+  const origin = typeof window !== 'undefined' ? window.location.origin : '';
+  const link = document.createElement('a');
+  link.href = `${origin}/downloads/ClipboardShield-v1.4.0.apk`;
+  link.download = 'ClipboardShield-v1.4.0.apk';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
 }
 
 export const WINDOWS_RELEASE_INFO = {

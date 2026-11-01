@@ -1,0 +1,24 @@
+{
+  "name": "Clipboard Shield",
+  "short_name": "C-Shield",
+  "description": "Native financial security & clipboard interceptor with real-time notification protection and zero-leak execution.",
+  "start_url": "/",
+  "id": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f7f3eb",
+  "theme_color": "#b88d43",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": [
+    "security",
+    "utilities",
+    "finance"
+  ]
+}

@@ -33,7 +33,7 @@ public class ThreatDetector {
     private static final Pattern ETH_ADDRESS_PATTERN = Pattern.compile("\\b0x[a-fA-F0-9]{40}\\b");
     private static final Pattern BTC_ADDRESS_PATTERN = Pattern.compile("\\b(1[a-km-zA-HJ-NP-Z1-9]{25,34}|3[a-km-zA-HJ-NP-Z1-9]{25,34}|bc1[a-z0-9]{39,59})\\b");
     private static final Pattern UPI_VPA_PATTERN = Pattern.compile("\\b[a-zA-Z0-9.\\-_]{2,256}@[a-zA-Z]{2,64}\\b");
-    private static final Pattern OTP_PATTERN = Pattern.compile("\\b(?:otp|code|verification)\\s*(?:is|:)?\\s*([0-9]{4,8})\\b", Pattern.CASE_INSENSITIVE);
+    private static final Pattern OTP_PATTERN = Pattern.compile("(?:OTP|verification code|one-time password|passcode|security code)(?:\\s+(?:is|code|number))*\\s*[:=-]?\\s*([0-9]{4,8})\\b", Pattern.CASE_INSENSITIVE);
     private static final Pattern CREDIT_CARD_CANDIDATE = Pattern.compile("\\b(?:[0-9]{4}[ -]?){3}[0-9]{4}\\b|\\b[0-9]{13,19}\\b");
 
     public static DetectionResult scan(String text) {
