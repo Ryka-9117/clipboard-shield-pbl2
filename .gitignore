@@ -10,4 +10,6 @@ coverage/
 android/build/
 android/app/build/
 .gradle/
+native-windows/*.exe
+
 
