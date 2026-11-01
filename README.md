@@ -30,14 +30,16 @@
 
 Official release binaries for **v1.4.0**:
 
-| Distribution | Filename | SHA-256 Checksum |
+| Distribution | Filename | Description |
 | :--- | :--- | :--- |
-| **Windows NSIS Installer** | [`Clipboard-Shield-Setup-1.4.0.exe`](https://github.com/ryka-parikh/clipboard-shield-pbl2/releases/download/v1.4.0/Clipboard-Shield-Setup-1.4.0.exe) | `948af1d34e039dd67beb9481e1fa048ece7d2b3f3b4d2799ca99901fbe980476` |
-| **Portable Standalone** | [`Clipboard-Shield-1.4.0-portable.exe`](https://github.com/ryka-parikh/clipboard-shield-pbl2/releases/download/v1.4.0/Clipboard-Shield-1.4.0-portable.exe) | `f34dd3e55365afbe019dc58ec3f5ff6e95dedf8a5e48d11d0514075fb48cc33b` |
+| **Windows NSIS Installer** | [`Clipboard-Shield-Setup-1.4.0.exe`](https://github.com/Ryka-9117/clipboard-shield-pbl2/releases/download/v1.4.0/Clipboard-Shield-Setup-1.4.0.exe) | Official Windows desktop installer with system tray daemon |
+| **Windows Portable** | [`Clipboard-Shield-1.4.0-portable.exe`](https://github.com/Ryka-9117/clipboard-shield-pbl2/releases/download/v1.4.0/Clipboard-Shield-1.4.0-portable.exe) | Standalone Windows executable |
+| **Android APK Package** | [`ClipboardShield-v1.4.0.apk`](public/downloads/ClipboardShield-v1.4.0.apk) | Native Android installer package with notification listener & floating overlay |
+| **Android Studio Source** | [`ClipboardShield-Android-Source.zip`](public/downloads/ClipboardShield-Android-Source.zip) | Complete native Android codebase with Gradle & Java sources |
 
 To verify the installer checksum in PowerShell:
 ```powershell
-Get-FileHash .\Clipboard-Shield-Setup-1.4.0.exe -Algorithm SHA256
+Get-FileHash .\public\downloads\Clipboard-Shield-Setup-1.4.0.exe -Algorithm SHA256
 ```
 
 ---

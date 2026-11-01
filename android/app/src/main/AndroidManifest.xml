@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.clipboardshield.app">
+
+    <!-- Permissions required for full background clipboard & financial interception -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="Clipboard Shield"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.ClipboardShield">
+
+        <!-- Main Interactive Dashboard Activity -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Floating Dialog / Prompt Overlay Activity for Financial Interceptions -->
+        <activity
+            android:name=".FloatingOverlayActivity"
+            android:theme="@style/Theme.ClipboardShield.Translucent"
+            android:launchMode="singleInstance"
+            android:excludeFromRecents="true"
+            android:exported="false" />
+
+        <!-- Real-time Clipboard Protection Foreground Service -->
+        <service
+            android:name=".ClipboardMonitorService"
+            android:foregroundServiceType="specialUse"
+            android:exported="false" />
+
+        <!-- Real-time Banking Notification & SMS Interceptor Service -->
+        <service
+            android:name=".NotificationInterceptionService"
+            android:label="Clipboard Shield Notification Guardian"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
+
+        <!-- Boot Receiver to start monitoring automatically on device reboot -->
+        <receiver
+            android:name=".BootReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+            </intent-filter>
+        </receiver>
+
+    </application>
+</manifest>

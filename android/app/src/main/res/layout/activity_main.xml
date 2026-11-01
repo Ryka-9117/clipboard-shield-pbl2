@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0F172A"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Top Header Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#1E293B"
+            android:padding="20dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🛡️ CLIPBOARD SHIELD"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#38BDF8" />
+
+            <TextView
+                android:id="@+id/tv_status_badge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="● SYSTEM PROTECTED (ACTIVE)"
+                android:textColor="#0D9488"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:layout_marginTop="6dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Native Android background interceptor and financial fraud guardian."
+                android:textColor="#94A3B8"
+                android:textSize="12sp"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <!-- Controls Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#1E293B"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <Switch
+                android:id="@+id/switch_protection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Real-Time Protection Daemon"
+                android:textColor="#F8FAFC"
+                android:checked="true"
+                android:textSize="14sp"
+                android:paddingVertical="8dp" />
+
+            <Switch
+                android:id="@+id/switch_auto_sanitize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Auto-Sanitize Threats (Redact Buffer)"
+                android:textColor="#F8FAFC"
+                android:textSize="14sp"
+                android:paddingVertical="8dp" />
+        </LinearLayout>
+
+        <!-- Live Metrics Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_marginBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#1E293B"
+                android:padding="14dp"
+                android:orientation="vertical"
+                android:layout_marginEnd="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TOTAL SCANS"
+                    android:textColor="#94A3B8"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/tv_scans_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="142"
+                    android:textColor="#F8FAFC"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#1E293B"
+                android:padding="14dp"
+                android:orientation="vertical"
+                android:layout_marginStart="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="THREATS BLOCKED"
+                    android:textColor="#94A3B8"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/tv_threats_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="#EF4444"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Threat Simulator / Inspector -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#1E293B"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LIVE THREAT INSPECTOR"
+                android:textColor="#38BDF8"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:layout_marginBottom="8dp" />
+
+            <EditText
+                android:id="@+id/et_test_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Type or paste card, token, or UPI VPA..."
+                android:textColorHint="#64748B"
+                android:textColor="#F8FAFC"
+                android:background="#0F172A"
+                android:padding="12dp"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tv_test_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Type or paste text above to test real-time regex parsing."
+                android:textColor="#94A3B8"
+                android:textSize="12sp"
+                android:layout_marginTop="10dp" />
+
+            <Button
+                android:id="@+id/btn_test_alert"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Simulate Intercepted UPI Transaction"
+                android:backgroundTint="#0D9488"
+                android:textColor="#FFFFFF"
+                android:layout_marginTop="12dp" />
+        </LinearLayout>
+
+        <!-- Permissions Status Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#1E293B"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SECURITY PERMISSIONS"
+                android:textColor="#38BDF8"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:layout_marginBottom="8dp" />
+
+            <Button
+                android:id="@+id/btn_permission_overlay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Grant Floating Overlay Permission"
+                android:backgroundTint="#334155"
+                android:textColor="#F8FAFC"
+                android:layout_marginBottom="8dp" />
+
+            <Button
+                android:id="@+id/btn_permission_notification"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Open Notification Listener Settings"
+                android:backgroundTint="#334155"
+                android:textColor="#F8FAFC" />
+        </LinearLayout>
+
+        <!-- Audit Ledger -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#1E293B"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="LOCAL AUDIT LEDGER"
+                    android:textColor="#38BDF8"
+                    android:textStyle="bold"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/btn_clear_audit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:text="Clear"
+                    android:textSize="11sp"
+                    android:backgroundTint="#EF4444"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_audit_log"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No audit entries yet."
+                android:textColor="#94A3B8"
+                android:textSize="11sp"
+                android:fontFamily="monospace"
+                android:layout_marginTop="8dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
